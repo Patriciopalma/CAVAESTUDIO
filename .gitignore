@@ -1,0 +1,9 @@
+# Ignorar todo por defecto
+*
+*/
+
+# Excepciones — solo archivos del sitio CAVA
+!.gitignore
+!index.html
+!assets/
+!assets/bottle-loop.mp4

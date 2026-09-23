@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magdalena — Información preliminar | CAVA Estudio</title>
+<style>
+:root{
+  --bg:#f1f1ef;
+  --paper:#f7f7f4;
+  --ink:#0b0b0b;
+  --muted:#70706c;
+  --line:#c9c9c4;
+  --dark:#0d0d0d;
+  --accent:#ff7447;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#a1a1a1;
+  color:var(--ink);
+}
+.deck{
+  width:min(1480px,100%);
+  margin:0 auto;
+  background:var(--bg);
+}
+.nav{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:16px 5vw;
+  background:rgba(241,241,239,.96);
+  border-bottom:1px solid var(--line);
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:.09em;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-weight:800;
+}
+.dot{width:8px;height:8px;border-radius:50%;background:#000}
+.navlinks{display:flex;gap:18px}
+.nav a{color:inherit;text-decoration:none}
+.nav .tag{opacity:.5}
+section{
+  min-height:100vh;
+  padding:80px 6vw 60px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  position:relative;
+  overflow:hidden;
+}
+.kicker{
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:.12em;
+  font-weight:700;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.kicker:before{
+  content:"";
+  width:30px;
+  height:1px;
+  background:currentColor;
+}
+h1,h2,h3,p{margin:0}
+h1{
+  font-size:clamp(58px,9.5vw,160px);
+  line-height:.84;
+  letter-spacing:-.065em;
+  font-weight:800;
+  max-width:1150px;
+}
+h2{
+  font-size:clamp(50px,8vw,128px);
+  line-height:.88;
+  letter-spacing:-.058em;
+  font-weight:800;
+  max-width:1180px;
+}
+h3{
+  font-size:clamp(28px,3vw,50px);
+  line-height:.98;
+  letter-spacing:-.04em;
+}
+.lead{
+  font-size:clamp(21px,2.2vw,34px);
+  line-height:1.15;
+  letter-spacing:-.025em;
+  max-width:900px;
+}
+.small{
+  font-size:14px;
+  line-height:1.48;
+  color:#3c3c39;
+  max-width:560px;
+}
+.hero{
+  min-height:calc(100vh - 48px);
+  justify-content:center;
+}
+.hero-meta{
+  position:absolute;
+  top:38px;left:6vw;right:6vw;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:.08em;
+}
+.hero-copy{position:relative;z-index:2}
+.hero .thin{font-weight:400}
+.hero-bottom{
+  display:grid;
+  grid-template-columns:1.1fr .7fr;
+  gap:40px;
+  align-items:end;
+  margin-top:55px;
+}
+.orb{
+  position:absolute;
+  width:min(51vw,700px);
+  aspect-ratio:1;
+  border-radius:50%;
+  right:3vw;
+  top:50%;
+  transform:translateY(-47%);
+  background:
+    radial-gradient(circle at 34% 30%,rgba(255,128,75,.95) 0 12%,rgba(255,128,75,.56) 24%,transparent 42%),
+    radial-gradient(circle at 72% 29%,rgba(105,105,225,.82) 0 15%,rgba(105,105,225,.4) 29%,transparent 47%),
+    radial-gradient(circle at 70% 72%,rgba(125,199,162,.82) 0 15%,rgba(125,199,162,.42) 28%,transparent 47%),
+    radial-gradient(circle at 37% 72%,rgba(246,84,64,.85) 0 14%,rgba(246,84,64,.40) 29%,transparent 48%),
+    #e4e2db;
+  box-shadow:inset 0 0 70px rgba(0,0,0,.1);
+  opacity:.88;
+}
+.orb:after{
+  content:"";
+  position:absolute;
+  inset:12%;
+  border-radius:45% 55% 61% 39% / 49% 43% 57% 51%;
+  background:rgba(0,0,0,.14);
+  filter:blur(14px);
+  transform:rotate(16deg);
+}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.quote{
+  font-size:clamp(38px,5.7vw,88px);
+  line-height:.96;
+  letter-spacing:-.05em;
+  max-width:1120px;
+}
+.stat,.card{
+  border-top:1px solid currentColor;
+  padding-top:17px;
+}
+.stat .big{
+  font-size:clamp(66px,8vw,120px);
+  line-height:.88;
+  letter-spacing:-.06em;
+  font-weight:800;
+}
+.stat .label{
+  margin-top:12px;
+  font-size:11px;
+  line-height:1.3;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  max-width:250px;
+}
+.card{
+  min-height:225px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.card .num{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  opacity:.5;
+}
+.card p{
+  font-size:16px;
+  line-height:1.38;
+  max-width:92%;
+}
+.dark{
+  background:var(--dark);
+  color:#f3f3ef;
+  border-color:#343434;
+}
+.dark .small{color:#bdbdb7}
+.tagrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+.pill{
+  padding:9px 13px;
+  border:1px solid #9a9a96;
+  border-radius:999px;
+  text-transform:uppercase;
+  font-size:10px;
+  letter-spacing:.08em;
+}
+.flow{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:10px;
+  margin-top:44px;
+}
+.step{
+  min-height:175px;
+  padding-top:16px;
+  border-top:1px solid currentColor;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.step b{
+  font-size:clamp(22px,2vw,34px);
+  line-height:1;
+  letter-spacing:-.035em;
+}
+.arrow{opacity:.35;font-size:22px}
+.levels{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid #6c6c6c;
+  border-bottom:1px solid #6c6c6c;
+  margin-top:36px;
+}
+.level{
+  min-height:340px;
+  padding:25px 20px 28px;
+  border-right:1px solid #454545;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.level:last-child{border-right:0}
+.level.active{
+  background:#f1f1ee;
+  color:#0b0b0b;
+}
+.level .n{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  opacity:.5;
+}
+.level p{font-size:14px;line-height:1.4;max-width:92%}
+.glow{
+  position:absolute;
+  width:470px;
+  height:470px;
+  border-radius:50%;
+  right:7%;
+  top:18%;
+  background:radial-gradient(circle,rgba(255,116,71,.68),rgba(255,116,71,.25) 34%,transparent 68%);
+  filter:blur(24px);
+  pointer-events:none;
+}
+.questions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 36px;
+  margin-top:36px;
+}
+.q{
+  padding:18px 0;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  gap:18px;
+  font-size:17px;
+}
+.q span{opacity:.4;min-width:28px}
+.cta{
+  min-height:86vh;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.cta .lead{margin-top:28px}
+.button{
+  margin-top:36px;
+  border:1px solid #000;
+  border-radius:999px;
+  padding:15px 24px;
+  text-transform:uppercase;
+  font-size:10px;
+  letter-spacing:.09em;
+}
+.footer{
+  padding:24px 6vw;
+  background:#0d0d0d;
+  color:#ddd;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  text-transform:uppercase;
+  font-size:10px;
+  letter-spacing:.08em;
+}
+@media(max-width:950px){
+  .navlinks{display:none}
+  section{padding:72px 24px 48px}
+  .hero-meta{left:24px;right:24px}
+  .hero-bottom,.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .orb{width:80vw;right:-22vw;opacity:.58}
+  .flow{grid-template-columns:1fr 1fr}
+  .levels{grid-template-columns:1fr 1fr}
+  .questions{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  h1{font-size:55px}
+  h2{font-size:46px}
+  .hero-bottom{margin-top:180px}
+  .flow{grid-template-columns:1fr}
+  .levels{grid-template-columns:1fr}
+  .level{border-right:0;border-bottom:1px solid #454545}
+  .footer{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <div class="nav">
+    <div class="brand"><span class="dot"></span>CAVA ESTUDIO</div>
+    <div class="navlinks">
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#sistema">Sistema</a>
+      <a href="#metodo">Método</a>
+      <a href="#siguiente">Siguiente paso</a>
+    </div>
+    <div class="tag">Información preliminar</div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-meta">
+      <span>Magdalena / Inmobiliario</span>
+      <span>23.09.2026</span>
+    </div>
+    <div class="orb"></div>
+    <div class="hero-copy">
+      <div class="kicker">Visibilidad inmobiliaria</div>
+      <h1 style="margin-top:24px">QUE TE<br><span class="thin">ENCUENTREN.</span></h1>
+      <div class="hero-bottom">
+        <p class="lead">Una primera lectura del negocio, el objetivo comercial y el sistema mínimo que necesitamos construir para transformar visibilidad en contactos reales.</p>
+        <p class="small">Este documento no es una propuesta económica. Es una síntesis preliminar para ordenar el problema antes de definir inversión, canales y alcance.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="diagnostico">
+    <div>
+      <div class="kicker">01 / Lo que entendimos</div>
+      <h2 style="margin-top:24px">NO QUIERES<br>“MÁS REDES”.</h2>
+    </div>
+    <div class="grid-2">
+      <p class="quote">Quieres que más personas sepan que existes, encuentren tus propiedades y puedan hablar contigo <b>directamente por WhatsApp.</b></p>
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:22px">
+        <p class="small">El desafío no parece ser “falta de contenido” por sí solo. Es convertir una oferta inmobiliaria existente en un sistema visible, comprensible y fácil de contactar.</p>
+        <div class="tagrow">
+          <span class="pill">Visibilidad</span>
+          <span class="pill">Contacto</span>
+          <span class="pill">WhatsApp</span>
+          <span class="pill">Terreno</span>
+          <span class="pill">Cierre</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div>
+      <div class="kicker">02 / Oferta actual</div>
+      <h2 style="margin-top:24px">HAY PRODUCTO.<br>FALTA SISTEMA.</h2>
+    </div>
+    <div>
+      <div class="grid-3">
+        <div class="stat"><div class="big">31</div><div class="label">Lotes aprox. disponibles en Rancagua</div></div>
+        <div class="stat"><div class="big">20</div><div class="label">Lotes aprox. disponibles en Requínoa</div></div>
+        <div class="stat"><div class="big">51</div><div class="label">Parcelas aprox. disponibles hoy</div></div>
+      </div>
+      <p class="small" style="margin-top:28px">Además de las parcelas, existe una cartera complementaria de propiedades en arriendo y venta. El foco principal sigue siendo parcelas y proyectos asociados.</p>
+    </div>
+  </section>
+
+  <section id="sistema" class="dark">
+    <div>
+      <div class="kicker">03 / Sistema comercial</div>
+      <h2 style="margin-top:24px">DE VERTE<br>A VISITAR.</h2>
+    </div>
+    <div>
+      <div class="flow">
+        <div class="step"><span>01</span><b>Anuncio</b><span class="arrow">→</span></div>
+        <div class="step"><span>02</span><b>Interés</b><span class="arrow">→</span></div>
+        <div class="step"><span>03</span><b>WhatsApp</b><span class="arrow">→</span></div>
+        <div class="step"><span>04</span><b>Calificación</b><span class="arrow">→</span></div>
+        <div class="step"><span>05</span><b>Visita</b><span class="arrow">→</span></div>
+        <div class="step"><span>06</span><b>Cierre</b><span>Resultado</span></div>
+      </div>
+      <div class="grid-2" style="margin-top:36px">
+        <p class="lead">El indicador principal no debería ser cuánta gente vio una publicación.</p>
+        <p class="small">Deberíamos medir cuántas personas interesadas llegan, cuántas califican, cuántas visitan terreno y cuántas terminan avanzando comercialmente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div>
+      <div class="kicker">04 / Lectura preliminar</div>
+      <h2 style="margin-top:24px">MENOS RUIDO.<br>MÁS CLARIDAD.</h2>
+    </div>
+    <div class="grid-4">
+      <div class="card"><span class="num">A</span><h3>Oferta</h3><p>Ordenar cada proyecto, propiedad, precio, condición y atributo para que la comunicación sea clara.</p></div>
+      <div class="card"><span class="num">B</span><h3>Público</h3><p>Entender quién compra, desde dónde, con qué presupuesto y qué motivación mueve la decisión.</p></div>
+      <div class="card"><span class="num">C</span><h3>Canales</h3><p>Definir dónde tiene sentido aparecer: Meta, Google, landing, WhatsApp u otros puntos de contacto.</p></div>
+      <div class="card"><span class="num">D</span><h3>Seguimiento</h3><p>Diseñar cómo responder, calificar y hacer seguimiento sin perder consultas por falta de orden.</p></div>
+    </div>
+  </section>
+
+  <section id="metodo" class="dark">
+    <div class="glow"></div>
+    <div style="position:relative;z-index:1">
+      <div class="kicker">05 / Método CAVA</div>
+      <h2 style="margin-top:24px">ENTENDER.<br>ORDENAR.<br>HACER VISIBLE.</h2>
+    </div>
+    <div class="grid-4" style="position:relative;z-index:1">
+      <div class="card"><span class="num">01</span><h3>Contexto</h3><p>Investigamos negocio, oferta, cliente, mercado, resultados previos y oportunidades reales.</p></div>
+      <div class="card"><span class="num">02</span><h3>Arquitectura</h3><p>Definimos qué hacer, qué canal usar, qué mensaje probar y cómo debe funcionar el sistema.</p></div>
+      <div class="card"><span class="num">03</span><h3>Visualización</h3><p>Traducimos la estrategia en anuncios, piezas, videos, landing pages y puntos de contacto.</p></div>
+      <div class="card"><span class="num">04</span><h3>Acompañamiento</h3><p>Operamos, medimos, testeamos y ajustamos para sostener el sistema en el tiempo.</p></div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div>
+      <div class="kicker">06 / Nivel de trabajo</div>
+      <h2 style="margin-top:24px">NO HAY QUE PARTIR<br>POR “COMPETIR”.</h2>
+    </div>
+    <div>
+      <div class="levels">
+        <div class="level active"><span class="n">Nivel 01</span><h3>Implementación</h3><p>Construir la base: oferta, mensajes, campañas, WhatsApp, landing y medición mínima.</p></div>
+        <div class="level active"><span class="n">Nivel 02</span><h3>Operación base</h3><p>Asignar ritmo, volumen, presupuesto y una frecuencia estable de comunicación y campañas.</p></div>
+        <div class="level"><span class="n">Nivel 03</span><h3>Escalamiento</h3><p>Aumentar canales, contenido, públicos, presupuesto y cantidad de pruebas.</p></div>
+        <div class="level"><span class="n">Nivel 04</span><h3>Competitividad</h3><p>Competir activamente por posicionamiento, audiencias y participación de mercado.</p></div>
+      </div>
+      <p class="small" style="margin-top:28px">Hipótesis preliminar: el punto de partida parece estar entre <b>implementación</b> y <b>operación base</b>. Esto debe confirmarse después del diagnóstico.</p>
+    </div>
+  </section>
+
+  <section>
+    <div>
+      <div class="kicker">07 / Puntos de contacto</div>
+      <h2 style="margin-top:24px">EL CANAL VIENE<br>DESPUÉS DEL PORQUÉ.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card"><span class="num">META</span><h3>Descubrimiento</h3><p>Instagram y Facebook pueden generar alcance, interés y conversaciones directas con públicos segmentados.</p></div>
+      <div class="card"><span class="num">GOOGLE</span><h3>Intención</h3><p>Puede capturar personas que ya están buscando parcelas, terrenos o propiedades específicas.</p></div>
+      <div class="card"><span class="num">WHATSAPP</span><h3>Conversión</h3><p>Debe convertirse en el punto donde el interés pasa a conversación, filtro y eventual visita.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div>
+      <div class="kicker">08 / Antes de cotizar</div>
+      <h2 style="margin-top:24px">PRIMERO HAY QUE<br>HACER LAS PREGUNTAS.</h2>
+    </div>
+    <div class="questions">
+      <div class="q"><span>01</span><b>¿Quién está comprando hoy tus parcelas?</b></div>
+      <div class="q"><span>02</span><b>¿Cuál es el precio, pie y condición de compra?</b></div>
+      <div class="q"><span>03</span><b>¿Qué diferencias reales tiene cada proyecto?</b></div>
+      <div class="q"><span>04</span><b>¿Cuántas consultas recibes hoy al mes?</b></div>
+      <div class="q"><span>05</span><b>¿Cuántas consultas terminan en visita?</b></div>
+      <div class="q"><span>06</span><b>¿Qué publicidad has probado y qué funcionó?</b></div>
+      <div class="q"><span>07</span><b>¿Qué capacidad tienes para responder y seguir leads?</b></div>
+      <div class="q"><span>08</span><b>¿Qué inversión publicitaria puedes sostener?</b></div>
+    </div>
+  </section>
+
+  <section id="siguiente" class="cta">
+    <div class="kicker">09 / Siguiente paso</div>
+    <h2 style="margin-top:26px">REUNIRNOS.<br>ENTENDER.<br>PROPONER.</h2>
+    <p class="lead">Hacemos una reunión de diagnóstico, levantamos la información clave y después construimos un estudio preliminar con una propuesta de trabajo ajustada a tu realidad.</p>
+    <div class="button">CAVA ESTUDIO / DIAGNÓSTICO INICIAL</div>
+  </section>
+
+  <div class="footer">
+    <span>CAVA Estudio — Comunicación estratégica</span>
+    <span>Magdalena / Información preliminar</span>
+    <span>Sin propuesta económica</span>
+  </div>
+</div>
+</body>
+</html>
